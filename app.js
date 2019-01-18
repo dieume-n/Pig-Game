@@ -1,41 +1,48 @@
-var scores, roundScore, activePlayer;
+var scores, roundScore, activePlayer, gamePlaying;
 
 init();
 
 document.querySelector('.btn-roll').addEventListener('click', function () {
-    // Random Number
-    var dice = Math.floor(Math.random() * 6) + 1;
-    // Display the result
-    var diceDOM = document.querySelector('.dice');
-    diceDOM.style.display = 'block';
-    diceDOM.src = 'img/dice-' + dice + '.png';
+    if (gamePlaying) {
+        // Random Number
+        var dice = Math.floor(Math.random() * 6) + 1;
+        // Display the result
+        var diceDOM = document.querySelector('.dice');
+        diceDOM.style.display = 'block';
+        diceDOM.src = 'img/dice-' + dice + '.png';
 
-    //Update the round score if the rolled number is not 1
-    if (dice !== 1) {
-        // Add score
-        roundScore += dice;
-        document.querySelector('#current-' + activePlayer).textContent = roundScore;
+        //Update the round score if the rolled number is not 1
+        if (dice !== 1) {
+            // Add score
+            roundScore += dice;
+            document.querySelector('#current-' + activePlayer).textContent = roundScore;
 
-    } else {
-        nextPlayer();
+        } else {
+            nextPlayer();
+        }
     }
+
 });
 
 document.querySelector('.btn-hold').addEventListener('click', function () {
-    // Add current score to gobal score
-    scores[activePlayer] += roundScore;
-    // Update the UI to reflect the above score
-    document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
-    // Check if player won the game
-    if (scores[activePlayer] >= 50) {
-        document.getElementById('name-' + activePlayer).textContent = "WINNER!!!";
-        document.querySelector('.dice').style.display = 'none';
-        document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
-        document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
-    } else {
-        // Next Player 
-        nextPlayer();
+    if (gamePlaying) {
+        // Add current score to gobal score
+        scores[activePlayer] += roundScore;
+        // Update the UI to reflect the above score
+        document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+        // Check if player won the game
+        if (scores[activePlayer] >= 30) {
+            document.getElementById('name-' + activePlayer).textContent = "WINNER!!!";
+            document.querySelector('.dice').style.display = 'none';
+            document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+            document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+            gamePlaying = false;
+        } else {
+            // Next Player 
+            nextPlayer();
+        }
     }
+
 });
 
 function nextPlayer() {
@@ -58,6 +65,7 @@ function init() {
     scores = [0, 0];
     activePlayer = 0;
     roundScore = 0;
+    gamePlaying = true;
 
     document.querySelector('.dice').style.display = 'none';
 
