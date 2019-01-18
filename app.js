@@ -17,6 +17,9 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
         document.querySelector('#current-' + activePlayer).textContent = roundScore;
 
     } else {
+        // Show the one that was selected
+        diceDOM.src = 'img/dice-' + 1 + '.png';
+
         nextPlayer();
     }
 });
@@ -49,7 +52,7 @@ function nextPlayer() {
     document.querySelector('.player-0-panel').classList.toggle('active');
     document.querySelector('.player-1-panel').classList.toggle('active');
 
-    document.querySelector('.dice').style.display = 'none';
+    // document.querySelector('.dice').style.display = 'none';
 }
 
 document.querySelector('.btn-new').addEventListener('click', init);
