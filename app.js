@@ -1,6 +1,6 @@
-var playersScores, roundScore, activePlayer;
+var scores, roundScore, activePlayer;
 
-playerScores = [0, 0];
+scores = [0, 0];
 roundScore = 0;
 activePlayer = 0;
 
@@ -35,5 +35,15 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
 
         document.querySelector('.player-0-panel').classList.toggle('active');
         document.querySelector('.player-1-panel').classList.toggle('active');
+
+        document.querySelector('.dice').style.display = 'none';
     }
+});
+
+document.querySelector('.btn-hold').addEventListener('click', function () {
+    // Add current score to gobal score
+    scores[activePlayer] += roundScore;
+    // Update the UI to reflect the above score
+    document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+    // Check if player won the game
 });
