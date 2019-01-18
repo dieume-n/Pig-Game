@@ -1,5 +1,5 @@
 # Pig Game
-##GAME RULES:
+## GAME RULES:
 
 - The game has 2 playes, playing in rounds
 - In each turn, a player roll a dice as many times as he wishes. Each result get added to his ROUND SCORE
